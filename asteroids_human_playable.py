@@ -413,7 +413,6 @@ while True:
             # Explosion!
             new_explosion = Explosion(asteroid.position, asteroid.size)
             explosions.add(new_explosion)
-            all_sprites.add(new_explosion)
 
         # Black background
         screen.fill((10, 0, 30))

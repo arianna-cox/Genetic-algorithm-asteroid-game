@@ -1,4 +1,4 @@
-from game import Game
+from game import Game, unit_vector
 from constants import *
 from input_translator import input_translator
 import numpy as np
@@ -32,7 +32,7 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
         game.update(keys_pressed)
 
         if do_draw:
-            game.draw_game(screen, SCORE_FONT)
-            time.sleep(1/6)
+            game.draw_game(screen, SCORE_FONT, inputs=inputs[0])
+            time.sleep(1/20)
     print(game.score)
     return game.score

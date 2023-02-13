@@ -357,7 +357,7 @@ class Game():
             new_explosion = Explosion(asteroid.position, asteroid.size)
             self.explosions.add(new_explosion)
 
-    def draw_game(self, screen, SCORE_FONT):
+    def draw_game(self, screen, SCORE_FONT, inputs=None):
         # Draws the current state of a game (class Game) onto the screen
         # Black background
         screen.fill((10, 0, 30))
@@ -371,6 +371,14 @@ class Game():
             explosion.draw(screen)
         # Draw score
         draw_score(screen, self.score, SCORE_FONT)
+
+        # Draw lines
+        if inputs is not None:
+            NUMBER_OF_SECTORS = int(len(inputs)/3)
+            SECTOR_EDGES = np.linspace(-np.pi, np.pi, NUMBER_OF_SECTORS + 1)
+            for n in range(NUMBER_OF_SECTORS):
+                pygame.draw.line(screen, (255, 255, 255), self.player.position, unit_vector(self.player.angle + SECTOR_EDGES[n]) * 600 + self.player.position, width=1)
+                pygame.draw.line(screen, (0, 255, 0), self.player.position, unit_vector(self.player.angle + inputs[n+2]) * 600 + self.player.position)
 
         # Update content of the screen
         pygame.display.flip()

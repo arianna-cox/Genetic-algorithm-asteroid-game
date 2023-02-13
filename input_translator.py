@@ -37,12 +37,14 @@ def soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS):
     return soonest_to_hit_asteroids
 
 
-def input_translator(player, asteroids, NUMBER_OF_SECTORS):
-    inputs = np.zeros(NUMBER_OF_SECTORS * 3 + 2)
-    inputs[:-2] = soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS).flatten()
+def input_translator(player, asteroids, NUMBER_OF_SECTORS, include_edges=False):
+    inputs = np.zeros(NUMBER_OF_SECTORS * 3 + 2 * include_edges)
+    inputs[:NUMBER_OF_SECTORS * 3] = soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS).flatten()
 
-    # Distance to nearest edge and the angle of the nearest point on the edge in the frame of reference of the player
-    edge_point = player.nearest_edge()
-    inputs[-2] = norm(edge_point - player.position)
-    inputs[-1] = player.angle_player_object(edge_point)
+    if include_edges == True:
+        # Distance to nearest edge and the angle of the nearest point on the edge in the frame of reference of the player
+        edge_point = player.nearest_edge()
+        inputs[-2] = norm(edge_point - player.position)
+        inputs[-1] = player.angle_player_object(edge_point)
+
     return np.array([inputs])

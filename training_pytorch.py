@@ -3,13 +3,15 @@ import numpy as np
 import torch.nn
 import pygame as g
 import pygad.torchga
+import time
 
 # Decide whether or not to run the graphics
-do_draw = False
+do_draw = True
 
 # Variables relating to the NN
-NUMBER_OF_SECTORS = 1
-num_neurons_input = NUMBER_OF_SECTORS * 3 + 2
+NUMBER_OF_SECTORS = 3
+include_edges = False
+num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
 num_neurons_hidden_layer_1 = 5
 num_solutions = 10
 # Threshold for the outputs of the NN above which a key is considered pressed
@@ -29,8 +31,8 @@ model = torch.nn.Sequential(input_layer,
 torch_ga = pygad.torchga.TorchGA(model=model, num_solutions=num_solutions)
 
 # Variables relating to the genetic algorithm
-num_generations = 2
-num_parents_mating = 5
+num_generations = 5
+num_parents_mating = 1
 mutation_percent_genes = 10
 initial_population = torch_ga.population_weights
 
@@ -48,7 +50,7 @@ fitness_func = lambda NN, solution_index: fitness_function(NN, solution_index, p
 
 def callback_generation(ga_instance):
     print("Generation = {generation}".format(generation=ga_instance.generations_completed))
-    print("Fitness    = {fitness}".format(fitness=ga_instance.best_solution()[1]))
+    print("Fitness = {fitness}".format(fitness=ga_instance.best_solution()[1]))
 
 
 ga_instance = pygad.GA(num_generations=num_generations,
