@@ -6,6 +6,7 @@ import pygad
 import pygad.kerasga
 import pygame
 import time
+from random import randint
 
 def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw = False):
     # Create an instance of the game
@@ -35,5 +36,5 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
         if do_draw:
             game.draw_game(screen, SCORE_FONT, inputs=inputs[0])
             time.sleep(1/20)
-    print(game.score)
+    print(f'score = {game.score}')
     return game.score

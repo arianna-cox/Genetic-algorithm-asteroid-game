@@ -12,8 +12,8 @@ do_draw = False
 NUMBER_OF_SECTORS = 1
 include_edges = False
 num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
-num_neurons_hidden_layer_1 = 5
-num_solutions = 10
+num_neurons_hidden_layer_1 = 4
+num_solutions = 4
 # Threshold for the outputs of the NN above which a key is considered pressed
 threshold = 0.1
 
@@ -31,9 +31,9 @@ model = torch.nn.Sequential(input_layer,
 torch_ga = pygad.torchga.TorchGA(model=model, num_solutions=num_solutions)
 
 # Variables relating to the genetic algorithm
-num_generations = 5
-num_parents_mating = 1
-mutation_percent_genes = 10
+num_generations = 3
+num_parents_mating = num_solutions
+mutation_percent_genes = (15, 5)
 initial_population = torch_ga.population_weights
 
 
@@ -49,16 +49,45 @@ fitness_func = lambda NN, solution_index: fitness_function(NN, solution_index, p
 
 
 def callback_generation(ga_instance):
-    print("Generation = {generation}".format(generation=ga_instance.generations_completed))
+    print("(on_generation) Generation = {generation}".format(generation=ga_instance.generations_completed))
     print("Fitness = {fitness}".format(fitness=ga_instance.best_solution()[1]))
+
+def on_start(ga_instance):
+    print("on_start()")
+
+def on_fitness(ga_instance, population_fitness):
+    print("on_fitness()")
+
+def on_parents(ga_instance, selected_parents):
+    print("on_parents()")
+
+def on_crossover(ga_instance, offspring_crossover):
+    print("on_crossover()")
+
+def on_mutation(ga_instance, offspring_mutation):
+    print("on_mutation()")
+
+def on_stop(ga_instance, last_population_fitness):
+    print("on_stop()")
 
 
 ga_instance = pygad.GA(num_generations=num_generations,
                        num_parents_mating=num_parents_mating,
+                       parent_selection_type="rws",
+                       keep_parents=0,
+                       keep_elitism=0,
                        mutation_percent_genes=mutation_percent_genes,
+                       mutation_type="adaptive",
                        initial_population=initial_population,
                        fitness_func=fitness_func,
-                       on_generation=callback_generation)
+                       on_generation=callback_generation,
+                       on_start=on_start,
+                       on_fitness=on_fitness,
+                       on_parents=on_parents,
+                       on_crossover=on_crossover,
+                       on_mutation=on_mutation,
+                       on_stop=on_stop
+                       )
 
 if __name__ == '__main__':
     ga_instance.run()
