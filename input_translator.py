@@ -37,6 +37,7 @@ def soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS):
 
 
 def input_translator(player, asteroids, NUMBER_OF_SECTORS, include_edges=False):
+    # Creates an input for the neural network based on the current state of the game
     inputs = np.zeros(NUMBER_OF_SECTORS * 3 + 2 * include_edges)
     inputs[:NUMBER_OF_SECTORS * 3] = soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS).flatten()
 

@@ -5,7 +5,6 @@ from training_pytorch import *
 profiler = cProfile.Profile()
 profiler.enable()
 
-
 ga_instance.run()
 
 

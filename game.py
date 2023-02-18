@@ -6,10 +6,14 @@ import random
 import math
 from constants import *
 
+
 # Load images
 asteroid_image = pygame.image.load('asteroid.png')
 explosion_image = pygame.image.load('explosion.png')
 spaceship_image = pygame.image.load('spaceship.png')
+
+# Choose whether or not the asteroids split
+do_asteroids_split = False
 
 
 def rotate(image, angle):
@@ -333,26 +337,28 @@ class Game():
         # Deal with collisions between lasers and asteroids
         collide_dict = pygame.sprite.groupcollide(self.asteroids, self.lasers, True, True)
         for asteroid in collide_dict:
-            if asteroid.size == ASTEROID_SIZES[0]:
-                self.score += ASTEROID_SCORES[0]
-                speed, angle1, angle2 = asteroid_split(0, asteroid.velocity, collide_dict[asteroid][0].angle)
-                new_asteroid1 = Asteroid(ASTEROID_SIZES[1], asteroid.position + ASTEROID_SIZES[1] * (
-                        unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
-                new_asteroid2 = Asteroid(ASTEROID_SIZES[1], asteroid.position + ASTEROID_SIZES[1] * (
-                        unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
-                self.asteroids.add(new_asteroid1)
-                self.asteroids.add(new_asteroid2)
-            elif asteroid.size == ASTEROID_SIZES[1]:
-                self.score += ASTEROID_SCORES[1]
-                speed, angle1, angle2 = asteroid_split(1, asteroid.velocity, collide_dict[asteroid][0].angle)
-                new_asteroid1 = Asteroid(ASTEROID_SIZES[2], asteroid.position + ASTEROID_SIZES[2] * (
-                        unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
-                new_asteroid2 = Asteroid(ASTEROID_SIZES[2], asteroid.position + ASTEROID_SIZES[2] * (
-                        unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
-                self.asteroids.add(new_asteroid1)
-                self.asteroids.add(new_asteroid2)
-            else:
-                self.score += ASTEROID_SCORES[2]
+            if do_asteroids_split == True:
+                if asteroid.size == ASTEROID_SIZES[0]:
+                    self.score += ASTEROID_SCORES[0]
+                    speed, angle1, angle2 = asteroid_split(0, asteroid.velocity, collide_dict[asteroid][0].angle)
+                    new_asteroid1 = Asteroid(ASTEROID_SIZES[1], asteroid.position + ASTEROID_SIZES[1] * (
+                            unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
+                    new_asteroid2 = Asteroid(ASTEROID_SIZES[1], asteroid.position + ASTEROID_SIZES[1] * (
+                            unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
+                    self.asteroids.add(new_asteroid1)
+                    self.asteroids.add(new_asteroid2)
+                elif asteroid.size == ASTEROID_SIZES[1]:
+                    self.score += ASTEROID_SCORES[1]
+                    speed, angle1, angle2 = asteroid_split(1, asteroid.velocity, collide_dict[asteroid][0].angle)
+                    new_asteroid1 = Asteroid(ASTEROID_SIZES[2], asteroid.position + ASTEROID_SIZES[2] * (
+                            unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
+                    new_asteroid2 = Asteroid(ASTEROID_SIZES[2], asteroid.position + ASTEROID_SIZES[2] * (
+                            unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
+                    self.asteroids.add(new_asteroid1)
+                    self.asteroids.add(new_asteroid2)
+                else:
+                    self.score += ASTEROID_SCORES[2]
+
             # Explosion!
             new_explosion = Explosion(asteroid.position, asteroid.size)
             self.explosions.add(new_explosion)

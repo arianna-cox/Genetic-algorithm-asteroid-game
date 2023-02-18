@@ -10,7 +10,7 @@ FPS_FACTOR = 0.1
 # Frames per second
 FPS = 60 * FPS_FACTOR
 
-# Add one to score after each second survived
+# Add one to the score after each second survived
 SCORE_RATE = FPS
 
 # Asteroid variables
