@@ -3,6 +3,7 @@ from fitness_function import fitness_function
 import numpy as np
 import pygame as g
 import pygad.torchga
+import time
 
 print(np.load("best_solution.npy"))
 best_solution = np.load("best_solution.npy")

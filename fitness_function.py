@@ -11,6 +11,7 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
     # Create an instance of the game
     game = Game()
     if do_draw:
+        print('Setting up draw...')
         # Initialize pygame
         pygame.init()
 

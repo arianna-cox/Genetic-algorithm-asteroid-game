@@ -10,7 +10,8 @@ def soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS):
     # 3. the angle of the asteroid in the frame of reference of the player (in the range -pi to pi)
 
     # Finds the asteroid with the highest 1/(time until impact) in each sector
-    soonest_to_hit_asteroids = np.array([(0, np.pi, 0) for _ in range(NUMBER_OF_SECTORS)])
+    SECTOR_EDGES = np.linspace(-np.pi, np.pi, NUMBER_OF_SECTORS + 1)
+    soonest_to_hit_asteroids = np.array([(0, np.pi, (SECTOR_EDGES[i]+SECTOR_EDGES[i+1])/2) for i in range(NUMBER_OF_SECTORS)])
     for asteroid in asteroids:
         # Find the time until impact given relative radial speed of the asteroid and the player
         relative_velocity = asteroid.velocity - player.velocity
@@ -25,12 +26,10 @@ def soonest_to_hit(player, asteroids, NUMBER_OF_SECTORS):
 
         # Determine which sector the asteroid is in
         sector_number = 0
-        # Should sector edges be inside the function or outside??
-        SECTOR_EDGES = np.linspace(-np.pi, np.pi, NUMBER_OF_SECTORS + 1)
         while relative_angle > SECTOR_EDGES[sector_number + 1]:
             sector_number += 1
         # Check which 1/(time until impact) is highest in this sector
-        if soonest_to_hit_asteroids[sector_number][0] < inverse_time_to_impact:
+        if soonest_to_hit_asteroids[sector_number][0] <= inverse_time_to_impact:
             # Find the angle between the asteroids' relative velocity and the line joining the asteroid and the player
             angle_relative_velocity = range_pi_to_pi(find_angle(relative_velocity) - find_angle(-displacement))
             soonest_to_hit_asteroids[sector_number] = (inverse_time_to_impact, angle_relative_velocity, relative_angle)

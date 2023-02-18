@@ -6,10 +6,10 @@ import pygad.torchga
 import time
 
 # Decide whether or not to run the graphics
-do_draw = True
+do_draw = False
 
 # Variables relating to the NN
-NUMBER_OF_SECTORS = 3
+NUMBER_OF_SECTORS = 1
 include_edges = False
 num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
 num_neurons_hidden_layer_1 = 5

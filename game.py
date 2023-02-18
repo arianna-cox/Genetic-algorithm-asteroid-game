@@ -151,7 +151,7 @@ class Player(pygame.sprite.Sprite):
 
     def draw(self, surface):
         # Draw the spaceship to the given surface
-        image = pygame.transform.rotate(self.image, self.angle - np.pi / 2)
+        image = pygame.transform.rotate(self.image, np.degrees(self.angle - np.pi / 2))
         rect = image.get_rect()
         rect.center = self.rect.center
         surface.blit(image, rect)
@@ -377,8 +377,8 @@ class Game():
             NUMBER_OF_SECTORS = int(len(inputs)/3)
             SECTOR_EDGES = np.linspace(-np.pi, np.pi, NUMBER_OF_SECTORS + 1)
             for n in range(NUMBER_OF_SECTORS):
-                pygame.draw.line(screen, (255, 255, 255), self.player.position, unit_vector(self.player.angle + SECTOR_EDGES[n]) * 600 + self.player.position, width=1)
-                pygame.draw.line(screen, (0, 255, 0), self.player.position, unit_vector(self.player.angle + inputs[n+2]) * 600 + self.player.position)
+                pygame.draw.line(screen, (255, 255, 255), self.player.position, unit_vector(self.player.angle + SECTOR_EDGES[n]) * 1200 + self.player.position, width=1)
+                pygame.draw.line(screen, (0, 255, 0), self.player.position, unit_vector(self.player.angle + inputs[3*n+2]) * 1200 + self.player.position)
 
         # Update content of the screen
         pygame.display.flip()
