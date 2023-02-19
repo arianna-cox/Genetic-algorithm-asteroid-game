@@ -34,6 +34,6 @@ def prediction_function(solution, data):
 
 # Show the best solution playing the game
 best_solution = np.load("best_solution.npy")
-for i in range(2):
+for i in range(4):
     fitness_function(best_solution, 0, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=1)
 

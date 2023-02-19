@@ -39,5 +39,5 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
         if do_draw:
             game.draw_game(screen, SCORE_FONT, inputs=inputs[0])
             time.sleep(1 / 20)
-    print(f'score = {game.score}')
+    #print(f'score = {game.score}')
     return game.score

@@ -30,7 +30,7 @@ asteroid_angle_var = np.radians(20)
 ASTEROID_SIZES = (96, 64, 32)
 ASTEROID_MASSES = (150, 60, 10)
 # Points scored for destroying an asteroid
-ASTEROID_SCORES = (1, 3, 10)
+ASTEROID_SCORES = (5, 10, 15)
 # The mean and variance of the deviation in angle of the two new asteroids from the original bigger asteroid (after
 # it is destroyed)
 COLLISION_ANGLE_DEV_MEAN = np.radians(20)
