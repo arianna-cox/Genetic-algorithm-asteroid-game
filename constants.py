@@ -47,7 +47,8 @@ LASER_SIZE = 6
 LASER_SPEED = 6 / FPS_FACTOR
 LASER_MASS = 1
 # Number of frames after which you can reload the laser gun
-FRAMES_BETWEEN_RELOADS = 50 * FPS_FACTOR
+# FRAMES_BETWEEN_RELOADS = 50 * FPS_FACTOR
+FRAMES_BETWEEN_RELOADS = 500 * FPS_FACTOR
 
 # Parameters controlling how the spaceship moves
 SHIPSIZE = (30, 60)
