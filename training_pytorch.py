@@ -6,10 +6,10 @@ import pygad.torchga
 import time
 
 # Variables relating to the NN
-NUMBER_OF_SECTORS = 1
+NUMBER_OF_SECTORS = 3
 include_edges = False
 num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
-num_neurons_hidden_layer_1 = 4
+num_neurons_hidden_layer_1 = 7
 
 # Threshold for the outputs of the NN above which a key is considered pressed
 threshold = 0.5
@@ -39,20 +39,21 @@ if __name__ == '__main__':
 
     # Variables relating to the genetic algorithm
     num_solutions = 100
-    num_generations = 1000
+    num_generations = 3
     num_parents_mating = num_solutions
     mutation_percent_genes = (15, 5)
 
     # If you would like to continue training with a previous instance of the GA give the filename here
     # Else, set filename to None and a new instance of the GA will be created
-    loaded_filename = 'ga_instance_s1_1'
+    loaded_filename = 'ga_instance_s3_1'
 
     # Choose the filename of the trained GA instance
-    new_filename = 'ga_instance_s1_1'
+    new_filename = 'ga_instance_s3_1'
     # Save a dictionary of the relevant variables corresponding to the instance
     dictionary = {'NUMBER_OF_SECTORS': NUMBER_OF_SECTORS, 'include_edges': include_edges,
                   'num_neurons_hidden_layer_1': num_neurons_hidden_layer_1, 'threshold': threshold,
-                  'num_solutions': num_solutions, 'mutation_percent_genes': mutation_percent_genes}
+                  'num_solutions': num_solutions, 'mutation_percent_genes': mutation_percent_genes,
+                  'num_generations': num_generations}
     np.save(new_filename + '_dictionary', dictionary)
     # Choose how frequently (after how many generations) the ga_instance saves to the new_filename
     saves_after_generations = 1
@@ -116,7 +117,8 @@ if __name__ == '__main__':
     else:
         ga_instance = pygad.load(filename=loaded_filename)
 
-    ga_instance.run()
+    for i in range(3):
+        ga_instance.run()
 
     ga_instance.save(filename=new_filename)
     print("saved!")
@@ -133,5 +135,5 @@ if __name__ == '__main__':
     #np.save("best_solution_weights", best_solution_weights)
 
     # best_solution = np.load("best_solution.npy")
-
-    fitness_function(best_solution, 0, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=True)
+    for i in range(100):
+        fitness_function(best_solution, 0, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=True)

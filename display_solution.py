@@ -32,8 +32,12 @@ def prediction_function(solution, data):
     output = model(torch.tensor(data[0]).float()).detach().numpy()
     return output
 
+loaded_filename = 'ga_instance_s1_2'
+ga_instance = pygad.load(filename=loaded_filename)
+best_solution, best_solution_fitness, best_solution_idx = ga_instance.best_solution()
+
 # Show the best solution playing the game
-best_solution = np.load("best_solution.npy")
+# best_solution = np.load("best_solution.npy")
 for i in range(4):
     fitness_function(best_solution, 0, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=1)
 
