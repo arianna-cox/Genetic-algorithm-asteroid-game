@@ -9,7 +9,7 @@ import time
 from random import randint
 
 
-def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=False):
+def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=False, include_edges=False):
     # Create an instance of the game
     game = Game()
 
@@ -26,7 +26,7 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
 
     while game.alive:
         # Calculates the inputs for the neural network based on the current state of the game
-        inputs = input_translator(game.player, game.asteroids, NUMBER_OF_SECTORS)
+        inputs = input_translator(game.player, game.asteroids, NUMBER_OF_SECTORS, include_edges=include_edges)
 
         # Applies the prediction function
         output = prediction_function(solution=NN, data=inputs)

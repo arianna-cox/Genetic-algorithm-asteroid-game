@@ -7,9 +7,9 @@ import time
 
 # Variables relating to the NN
 NUMBER_OF_SECTORS = 3
-include_edges = False
+include_edges = True
 num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
-num_neurons_hidden_layer_1 = 7
+num_neurons_hidden_layer_1 = 9
 
 # Threshold for the outputs of the NN above which a key is considered pressed
 threshold = 0.5
@@ -45,10 +45,10 @@ if __name__ == '__main__':
 
     # If you would like to continue training with a previous instance of the GA give the filename here
     # Else, set filename to None and a new instance of the GA will be created
-    loaded_filename = 'ga_instance_s3_1'
+    loaded_filename = None
 
     # Choose the filename of the trained GA instance
-    new_filename = 'ga_instance_s3_1'
+    new_filename = 'ga_instance_se3_1'
     # Save a dictionary of the relevant variables corresponding to the instance
     dictionary = {'NUMBER_OF_SECTORS': NUMBER_OF_SECTORS, 'include_edges': include_edges,
                   'num_neurons_hidden_layer_1': num_neurons_hidden_layer_1, 'threshold': threshold,
@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     def fitness_func(NN, solution_index):
         return fitness_function(NN, solution_index, prediction_function,
-                                NUMBER_OF_SECTORS, threshold, do_draw=do_draw_training)
+                                NUMBER_OF_SECTORS, threshold, do_draw=do_draw_training, include_edges=include_edges)
 
     def callback_generation(Ga_instance):
         generation = Ga_instance.generations_completed

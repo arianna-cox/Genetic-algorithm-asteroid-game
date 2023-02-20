@@ -136,21 +136,21 @@ class Player(pygame.sprite.Sprite):
         self.angle = (self.angle + self.frequency) % (2 * np.pi)
 
         # Player not allowed off screen and loses all speed in corresponding direction
-        if self.rect.left < 0:
+        if self.rect.left <= 0:
             self.rect.left = 0
-            self.velocity[0] *= -EDGE_DAMPING
+            self.velocity[0] = max(abs(EDGE_DAMPING*self.velocity[0]), ACCELERATION_FORWARDS)
             self.angle = np.pi - self.angle
-        if self.rect.right > SCREEN_WIDTH:
+        if self.rect.right >= SCREEN_WIDTH:
             self.rect.right = SCREEN_WIDTH
-            self.velocity[0] *= -EDGE_DAMPING
+            self.velocity[0] = -max(abs(EDGE_DAMPING*self.velocity[0]), ACCELERATION_FORWARDS)
             self.angle = np.pi - self.angle
-        if self.rect.top < 0:
+        if self.rect.top <= 0:
             self.rect.top = 0
-            self.velocity[1] *= -EDGE_DAMPING
+            self.velocity[1] = max(abs(EDGE_DAMPING*self.velocity[1]), ACCELERATION_FORWARDS)
             self.angle = np.pi + self.angle
-        if self.rect.bottom > SCREEN_HEIGHT:
+        if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
-            self.velocity[1] *= -EDGE_DAMPING
+            self.velocity[1] = -max(abs(EDGE_DAMPING*self.velocity[1]), ACCELERATION_FORWARDS)
             self.angle = np.pi + self.angle
 
     def draw(self, surface):
