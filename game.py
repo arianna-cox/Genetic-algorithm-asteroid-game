@@ -8,9 +8,18 @@ from constants import *
 
 
 # Load images
+<<<<<<< HEAD
 asteroid_image = pygame.image.load('Images/asteroid.png')
 explosion_image = pygame.image.load('Images/explosion.png')
 spaceship_image = pygame.image.load('Images/spaceship.png')
+=======
+asteroid_image = pygame.image.load('asteroid.png')
+explosion_image = pygame.image.load('explosion.png')
+spaceship_image = pygame.image.load('spaceship.png')
+
+# Choose whether or not the asteroids split
+do_asteroids_split = False
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
 
 def rotate(image, angle):
@@ -106,6 +115,10 @@ class Player(pygame.sprite.Sprite):
         self.frequency = 0
 
     @property
+<<<<<<< HEAD
+=======
+    #### DESPERATELY NEEDS REWRITING!!!!!!!!!!!! (does not rotate with the player!)
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
     def rect(self):
         return pygame.Rect(self.position[0] - self.width / 2, self.position[1] - self.height / 2, self.width, self.height)
 
@@ -113,8 +126,11 @@ class Player(pygame.sprite.Sprite):
     def update(self, pressed_keys):
         # speed decays by damping factor
         self.velocity = self.velocity * SPEED_DAMPING
+<<<<<<< HEAD
         # Records whether the player hits the edge or not
         did_hit = 0
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
         # Move forwards (key 1) or backwards (key 2)
         if pressed_keys[1]:
@@ -138,23 +154,35 @@ class Player(pygame.sprite.Sprite):
             self.rect.left = 0
             self.velocity[0] = max(abs(EDGE_DAMPING*self.velocity[0]), ACCELERATION_FORWARDS)
             self.angle = np.pi - self.angle
+<<<<<<< HEAD
             did_hit = 1
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         if self.rect.right >= SCREEN_WIDTH:
             self.rect.right = SCREEN_WIDTH
             self.velocity[0] = -max(abs(EDGE_DAMPING*self.velocity[0]), ACCELERATION_FORWARDS)
             self.angle = np.pi - self.angle
+<<<<<<< HEAD
             did_hit = 1
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         if self.rect.top <= 0:
             self.rect.top = 0
             self.velocity[1] = max(abs(EDGE_DAMPING*self.velocity[1]), ACCELERATION_FORWARDS)
             self.angle = np.pi + self.angle
+<<<<<<< HEAD
             did_hit = 1
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
             self.velocity[1] = -max(abs(EDGE_DAMPING*self.velocity[1]), ACCELERATION_FORWARDS)
             self.angle = np.pi + self.angle
+<<<<<<< HEAD
             did_hit = 1
         return did_hit
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
     def draw(self, surface):
         # Draw the spaceship to the given surface
@@ -163,6 +191,7 @@ class Player(pygame.sprite.Sprite):
         rect.center = self.rect.center
         surface.blit(image, rect)
 
+<<<<<<< HEAD
     def angle_player_object(self, object_position):
         # Calculates the angle in radians of the asteroid in the frame of reference of the player
         # (where the players angle is set to 0 radians and the range is between -pi and pi)
@@ -173,23 +202,41 @@ class Player(pygame.sprite.Sprite):
     def inverse_time_to_edge(self):
         # Find the nearest point on the edge of the screen to the player
         # Find the time until the player will hit this nearest edge and return 1/time
+=======
+    def nearest_edge(self):
+        # Find the nearest point on the edge of the screen to the player
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         edge_point = np.zeros(2)
         if min(SCREEN_WIDTH - self.position[0], self.position[0]) > min(SCREEN_HEIGHT - self.position[1],
                                                                         self.position[1]):
             edge_point[0] = self.position[0]
             if SCREEN_HEIGHT - self.position[1] < self.position[1]:
                 edge_point[1] = SCREEN_HEIGHT
+<<<<<<< HEAD
             one_over_time = self.velocity[1] / (edge_point[1] - self.position[1])
+=======
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         else:
             edge_point[1] = self.position[1]
             if SCREEN_WIDTH - self.position[0] < self.position[0]:
                 edge_point[0] = SCREEN_WIDTH
+<<<<<<< HEAD
             one_over_time = self.velocity[0] / (edge_point[0] - self.position[0])
 
         # Also find and return the angle of this point on the edge in the reference frame of the spaceship
         angle = self.angle_player_object(edge_point)
 
         return one_over_time, angle
+=======
+        return edge_point
+
+    def angle_player_object(self, object_position):
+        # Calculates the angle in radians of the asteroid in the frame of reference of the player
+        # (where the players angle is set to 0 radians and the range is between -pi and pi)
+        displacement = object_position - self.position
+        relative_angle = find_angle(displacement) - self.angle
+        return range_pi_to_pi(relative_angle)
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
 
 class Asteroid(pygame.sprite.Sprite):
@@ -300,7 +347,11 @@ class Game():
         self.alive = True
 
     def update(self, keys_pressed):
+<<<<<<< HEAD
         # Update frame number
+=======
+        # Frame number
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         self.framenumber += 1
         if self.framenumber % SCORE_RATE == 0:
             self.score += 1
@@ -310,7 +361,11 @@ class Game():
         self.avg_asteroid_speed += AVG_ASTEROID_GRADIENT / FPS
         self.min_asteroid_speed += MIN_ASTEROID_GRADIENT / FPS
 
+<<<<<<< HEAD
         # Add an asteroid is created after FRAMES_BETWEEN_ASTEROIDS number of frames
+=======
+        # Add an asteroid after FRAMES_BETWEEN_ASTEROIDS number of frames
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         if self.asteroid_timer > 0: self.asteroid_timer -= 1
 
         if self.asteroid_timer == 0:
@@ -324,9 +379,14 @@ class Game():
             new_asteroid = Asteroid(size, random_centre, speed, angle)
             self.asteroids.add(new_asteroid)
 
+<<<<<<< HEAD
         # Update the sprites depending on the keys pressed
         if self.player.update(keys_pressed) == 1:
             self.score -= points_lost
+=======
+        # Update the player's ship's position depending on the keys pressed
+        self.player.update(keys_pressed)
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
         self.asteroids.update()
         self.lasers.update()
         self.explosions.update()
@@ -348,9 +408,15 @@ class Game():
         # Deal with collisions between lasers and asteroids
         collide_dict = pygame.sprite.groupcollide(self.asteroids, self.lasers, True, True)
         for asteroid in collide_dict:
+<<<<<<< HEAD
             if asteroid.size == ASTEROID_SIZES[0]:
                 self.score += ASTEROID_SCORES[0]
                 if do_asteroids_split == True:
+=======
+            if do_asteroids_split == True:
+                if asteroid.size == ASTEROID_SIZES[0]:
+                    self.score += ASTEROID_SCORES[0]
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
                     speed, angle1, angle2 = asteroid_split(0, asteroid.velocity, collide_dict[asteroid][0].angle)
                     new_asteroid1 = Asteroid(ASTEROID_SIZES[1], asteroid.position + ASTEROID_SIZES[1] * (
                             unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
@@ -358,9 +424,14 @@ class Game():
                             unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
                     self.asteroids.add(new_asteroid1)
                     self.asteroids.add(new_asteroid2)
+<<<<<<< HEAD
             elif asteroid.size == ASTEROID_SIZES[1]:
                 self.score += ASTEROID_SCORES[1]
                 if do_asteroids_split == True:
+=======
+                elif asteroid.size == ASTEROID_SIZES[1]:
+                    self.score += ASTEROID_SCORES[1]
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
                     speed, angle1, angle2 = asteroid_split(1, asteroid.velocity, collide_dict[asteroid][0].angle)
                     new_asteroid1 = Asteroid(ASTEROID_SIZES[2], asteroid.position + ASTEROID_SIZES[2] * (
                             unit_vector(angle1) - unit_vector((angle1 + angle2) / 2)), speed, angle1)
@@ -368,8 +439,13 @@ class Game():
                             unit_vector(angle2) - unit_vector((angle1 + angle2) / 2)), speed, angle2)
                     self.asteroids.add(new_asteroid1)
                     self.asteroids.add(new_asteroid2)
+<<<<<<< HEAD
             else:
                 self.score += ASTEROID_SCORES[2]
+=======
+                else:
+                    self.score += ASTEROID_SCORES[2]
+>>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
             # Explosion!
             new_explosion = Explosion(asteroid.position, asteroid.size)
