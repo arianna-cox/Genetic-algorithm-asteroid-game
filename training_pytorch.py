@@ -5,9 +5,9 @@ import pygad.torchga
 
 # Variables relating to the NN
 NUMBER_OF_SECTORS = 3
-include_edges = True
+include_edges = False
 num_neurons_input = NUMBER_OF_SECTORS * 3 + 2 * include_edges
-num_neurons_hidden_layer_1 = 9
+num_neurons_hidden_layer_1 = 7
 
 # Threshold for the outputs of the NN above which a key is considered pressed
 threshold = 0.5
@@ -127,12 +127,12 @@ if __name__ == '__main__':
         ga_instance = pygad.load(filename=loaded_filename)
 
     # Training the genetic algorithm instance
-    for i in range(3):
-        ga_instance.run()
-        print(f'in loop {i}')
-
-    ga_instance.save(filename=new_filename)
-    print("saved!")
+    # for i in range(3):
+    #     ga_instance.run()
+    #     print(f'in loop {i}')
+    #
+    # ga_instance.save(filename=new_filename)
+    # print("saved!")
 
     # Explore results
     ga_instance.plot_fitness(title="Best fitness vs generation")

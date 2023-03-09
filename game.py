@@ -101,6 +101,7 @@ class Player(pygame.sprite.Sprite):
         # Initial angular frequency of zero
         self.frequency = 0
 
+    @property
     def rect(self):
         return pygame.Rect(self.position[0] - self.width / 2, self.position[1] - self.height / 2, self.width,
                            self.height)
