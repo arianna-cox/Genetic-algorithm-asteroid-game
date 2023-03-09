@@ -43,12 +43,6 @@ def input_translator(player, asteroids, NUMBER_OF_SECTORS, include_edges=False):
 
     if include_edges == True:
         # Distance to nearest edge and the angle of the nearest point on the edge in the frame of reference of the player
-<<<<<<< HEAD
         inputs[-1], inputs[-2] = player.inverse_time_to_edge()
-=======
-        edge_point = player.nearest_edge()
-        inputs[-2] = norm(edge_point - player.position)
-        inputs[-1] = player.angle_player_object(edge_point)
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
     return np.array([inputs])
