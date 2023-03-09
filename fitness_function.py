@@ -1,17 +1,14 @@
 from game import Game
 from constants import *
 from input_translator import input_translator
-<<<<<<< HEAD
 import pygame
 import time
-=======
 import numpy as np
 import pygad
 import pygad.kerasga
 import pygame
 import time
 from random import randint
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
 
 def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS, threshold, do_draw=False, include_edges=False):
@@ -46,8 +43,5 @@ def fitness_function(NN, solution_index, prediction_function, NUMBER_OF_SECTORS,
             time.sleep(1 / 20)
     #print(f'score = {game.score}')
     print(solution_index)
-<<<<<<< HEAD
     return max(0, game.score)
-=======
     return game.score
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d

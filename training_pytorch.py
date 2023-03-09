@@ -1,13 +1,7 @@
 from fitness_function import fitness_function
 import numpy as np
 import torch.nn
-<<<<<<< HEAD
 import pygad.torchga
-=======
-import pygame as g
-import pygad.torchga
-import time
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
 # Variables relating to the NN
 NUMBER_OF_SECTORS = 3
@@ -65,10 +59,10 @@ if __name__ == '__main__':
     # If you would like to continue training with a previous instance of the GA give the filename here
     # Else, set filename to None and a new instance of the GA will be created
 <<<<<<< HEAD
-    loaded_filename = 'ga_instances/ga_instance_sne3_2'
+    loaded_filename = 'ga_instances/ga_instance_s3_1'
 
     # Choose the filename of the trained GA instance
-    new_filename = 'ga_instances/ga_instance_sne3_2'
+    new_filename = 'ga_instances/ga_instance_s3_1'
 
     # Choose how frequently (after how many generations) the ga_instance saves to the new_filename
     saves_after_generations = 1
@@ -182,7 +176,6 @@ if __name__ == '__main__':
                                on_mutation=on_mutation,
                                on_stop=on_stop
                                )
-<<<<<<< HEAD
 
         # Save a dictionary of the relevant variables corresponding to the instance
         dictionary = {'NUMBER_OF_SECTORS': NUMBER_OF_SECTORS, 'include_edges': include_edges,
@@ -198,16 +191,10 @@ if __name__ == '__main__':
     for i in range(3):
         ga_instance.run()
         print(f'in loop {i}')
-=======
-    else:
-        ga_instance = pygad.load(filename=loaded_filename)
 
-    for i in range(3):
-        ga_instance.run()
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 
-    ga_instance.save(filename=new_filename)
-    print("saved!")
+    # ga_instance.save(filename=new_filename)
+    # print("saved!")
 
 <<<<<<< HEAD
     # Explore results

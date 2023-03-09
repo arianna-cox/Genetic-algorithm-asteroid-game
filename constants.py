@@ -1,13 +1,10 @@
 import numpy as np
 
-<<<<<<< HEAD
 # Choose whether or not the asteroids split
 do_asteroids_split = False
 # Choose whether or not the player loses points if they hit the edge (if not set to 0)
 points_lost = 3
 
-=======
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 # Screen dimensions
 SCREEN_HEIGHT = 800
 SCREEN_WIDTH = 800
@@ -22,11 +19,7 @@ FPS = 60 * FPS_FACTOR
 SCORE_RATE = FPS
 
 # Asteroid variables
-<<<<<<< HEAD
 SECONDS_BETWEEN_ASTEROIDS = 15
-=======
-SECONDS_BETWEEN_ASTEROIDS = 4
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 # Number of frames after which another asteroid spawns
 FRAMES_BETWEEN_ASTEROIDS = SECONDS_BETWEEN_ASTEROIDS * FPS
 # Initial minimum, average and variance of the asteroid speeds
@@ -38,7 +31,6 @@ MIN_ASTEROID_GRADIENT = (1 / 500)
 AVG_ASTEROID_GRADIENT = (1 / 300)
 VAR_ASTEROID_GRADIENT = np.radians(1 / 200)
 # Variance in the angle of the spawned asteroids
-<<<<<<< HEAD
 #asteroid_angle_var = np.radians(20)
 asteroid_angle_var = np.radians(25)
 ASTEROID_SIZES = (96, 64, 32)
@@ -46,13 +38,6 @@ ASTEROID_MASSES = (150, 60, 10)
 # Points scored for destroying an asteroid
 ASTEROID_SCORES = (20, 30, 15)
 #ASTEROID_SCORES = (5, 10, 15)
-=======
-asteroid_angle_var = np.radians(20)
-ASTEROID_SIZES = (96, 64, 32)
-ASTEROID_MASSES = (150, 60, 10)
-# Points scored for destroying an asteroid
-ASTEROID_SCORES = (5, 10, 15)
->>>>>>> cd3ffa7b731c5a8f51e16289c3220cae4671ad1d
 # The mean and variance of the deviation in angle of the two new asteroids from the original bigger asteroid (after
 # it is destroyed)
 COLLISION_ANGLE_DEV_MEAN = np.radians(20)
